@@ -129,3 +129,50 @@ $(document).ready(function () {
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
 })
+
+/*
+// script.js
+$(document).ready(function () {
+    $('#search-input').on('input', function () {
+        var query = $(this).val();
+
+        if (query.length >= 3) {
+            var page = 1;  // Página inicial
+            var pageSize = 10;  // Número de resultados por página
+
+            // Substitua 'http://192.168.160.58/NBA/api/Search' pela URL real da sua API
+            var apiUrl = `http://192.168.160.58/NBA/api/Search?q=${query}&page=${page}&pagesize=${pageSize}`;
+
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                success: function (data) {
+                    displayResults(data);
+                }
+            });
+        } else {
+            $('#autocomplete-results').empty();
+        }
+    });
+
+    function displayResults(results) {
+        var resultList = $('#autocomplete-results');
+        resultList.empty();
+
+        if (results.length > 0) {
+            results.forEach(function (item) {
+                var listItem = $('<li>').text(item.nome);  // Substitua 'nome' pelo campo real do objeto retornado pela sua API
+                resultList.append(listItem);
+
+                listItem.click(function () {
+                    $('#search-input').val(item.nome);  // Substitua 'nome' pelo campo real do objeto retornado pela sua API
+                    resultList.empty();
+                });
+            });
+        } else {
+            resultList.append('<li>Nenhum resultado encontrado</li>');
+        }
+    }
+});
+
+*/

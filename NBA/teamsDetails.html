@@ -32,8 +32,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="arenas.html"><i class="fa fa-soccer-ball-o text-warning"></i> Arenas</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
+                    <li class="nav-item"><a class="nav-link " aria-current="page" href="players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="xxx.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="xxx.html"><i class="fa fa-bookmark-o text-info "></i> Seasons</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="xxx.html"><i class="fa fa-magic" title="The party continues..."></i> &middot;&middot;&middot;</a></li>
@@ -54,37 +54,35 @@
             <div class="col-2">Id</div><div class="col-10" data-bind="text: Id"></div>
         </div>
         <div class="row border-bottom g-2">
+            <div class="col-2">Acronym</div><div class="col-10" data-bind="text: Acronym"></div>
+        </div>
+        <div class="row border-bottom g-2">
             <div class="col-2">Name</div><div class="col-10" data-bind="text: Name"></div>
         </div>
         <div class="row border-bottom g-2">
-            <div class="col-2">Birthdate</div><div class="col-10" data-bind="text: Birthdate"></div>
+            <div class="col-2">ConferenceName</div><div class="col-10"><a class="nav-link" data-bind="text:ConferenceName, attr: { href:'./countryDetails.html?id=' + CountryId }" title="Show Country Details"></a></div><!--falta os detalhes-->
         </div>
         <div class="row border-bottom g-2">
-            <div class="col-2">Country</div><div class="col-10"><a class="nav-link" data-bind="text:CountryName, attr: { href:'./countryDetails.html?id=' + CountryId }" title="Show Country Details"></a></div>
+            <div class="col-2">DivisionName</div><div class="col-10" data-bind="text: DivisionName"></div>
         </div>
         <div class="row border-bottom g-2">
-            <div class="col-2">DraftYear</div><div class="col-10" data-bind="text: DraftYear"></div>
+            <div class="col-2">StateName</div><div class="col-10"><a class="nav-link" data-bind="text:StateName, attr: { href:'./positionDetails.html?id=' + PositionId }" title="Show Position Details"></a></div>
         </div>
         <div class="row border-bottom g-2">
-            <div class="col-2">Position</div><div class="col-10"><a class="nav-link" data-bind="text:PositionName, attr: { href:'./positionDetails.html?id=' + PositionId }" title="Show Position Details"></a></div>
+            <div class="col-2">City</div><div class="col-10" data-bind="text: City"></div>
         </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Height</div><div class="col-10" data-bind="text: Height"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Weight</div><div class="col-10" data-bind="text: Weight"></div>
-        </div>
+
         <div class="row border-bottom g-2">
             <div class="col-2">School</div><div class="col-10" data-bind="text: School"></div>
         </div>
         <div class="row border-bottom g-2" data-bind="visible: Photo() != '' && Photo() != null">
-            <div class="col-2">Photo</div><div class="small col-10">
+            <div class="col-2">Logo</div><div class="small col-10">
                 <img class="img-thumbnail" data-bind="attr:{src: Photo}"><br />
                 <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
             </div>
         </div>
         <div class="row border-bottom g-2">
-            <div class="col-2">Biography</div><div class="col-10" data-bind="text: Biography"></div>
+            <div class="col-2">History</div><div class="col-10" data-bind="text: History"></div>
         </div>
         <div class="row border-bottom g-2">
             <div class="col-2">Seasons</div><div class="col-10" data-bind="text: Seasons"></div>
@@ -93,7 +91,7 @@
             <div class="col-2">Teams</div><div class="col-10" data-bind="text: Teams"></div>
         </div>
         <!-- /ko -->
-        <a href="./players.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+        <a href="./teams.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

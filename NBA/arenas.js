@@ -3,7 +3,7 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Arenas/');
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/api/Arenas');
     self.displayName = 'NBA Arenas List';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
@@ -13,6 +13,7 @@ var vm = function () {
     self.totalRecords = ko.observable(50);
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
+    self.searchlist = ko.observableArray([]);
     self.previousPage = ko.computed(function () {
         return self.currentPage() * 1 - 1;
     }, self);
@@ -42,59 +43,42 @@ var vm = function () {
         return list;
     };
 
-  
-    var searchTerm = undefined;
-
-
-    self.activate = function (id, searchTerm) {
-        if (id == undefined) {
-            id = 1;
-        };
-        if (searchTerm == undefined) {
+    //--- Page Events
+    self.activate = function (id, q) {
+        if (q == undefined) {
             console.log('CALL: getArenas...');
-            var composedUri = self.baseUri() + "?page=" + id + "&pagesize=" + self.pagesize();
-            console.log(self.baseUri() + "?page=" + id + "&pagesize=" + self.pagesize());
-        } else {
-            console.log(searchTerm);
-            console.log('CALL: getArenas...');
-            console.log('CALL: getArenas...', 'Search Term:', searchTerm);
-            var composedUri = self.baseUri() + "/search?q=" + encodeURIComponent(searchTerm) + "&page=" + id + "&pagesize=" + self.pagesize();
-            console.log(self.baseUri() + "/search?q=" + encodeURIComponent(searchTerm) + "&page=" + id + "&pagesize=" + self.pagesize());
-        };
-
-        ajaxHelper(composedUri, 'GET').done(function (data) {
-            console.log(data);
-            hideLoading();
-            self.records(data.Records);
-            self.currentPage(data.CurrentPage);
-            self.hasNext(data.HasNext);
-            self.hasPrevious(data.HasPrevious);
-            self.pagesize(data.PageSize)
-            self.totalPages(data.TotalPages);
-            self.totalRecords(data.TotalRecords);
-            console.log("ye")
-        });
-    };
-    self.search = function () {
-        searchTerm = document.getElementById('procura').value;
-        if (searchTerm.length==0) {
-            searchTerm = undefined;
-        };
-
-        console.log(searchTerm);
-
-
-        var pg = getUrlParameter('page');
-        console.log(pg);
-
-        if (pg == undefined, searchTerm) {
-            self.activate(1, searchTerm); 
-        } else {
-            self.activate(pg, searchTerm);
+            var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
+            console.log(composedUri)
+            ajaxHelper(composedUri, 'GET').done(function (data) {
+                console.log(data);
+                hideLoading();
+                self.records(data.Records);
+                self.currentPage(data.CurrentPage);
+                self.hasNext(data.HasNext);
+                self.hasPrevious(data.HasPrevious);
+                self.pagesize(data.PageSize)
+                self.totalPages(data.TotalPages);
+                self.totalRecords(data.TotalRecords);
+                //self.SetFavourites();
+            });
         }
-    }
-    // Internal functions
+        else {
+            var composedUri = self.baseUri() + "/Search?q=" + q;
+
+            ajaxHelper(composedUri, 'GET').done(function (data) {
+                console.log(data);
+                self.searchlist(data);
+                hideLoading();
+            });
+        }
+
+
+    };
+
+    //--- Internal functions
     function ajaxHelper(uri, method, data) {
+        console.log(uri);
+
         self.error(''); // Clear error message
         return $.ajax({
             type: method,
@@ -140,19 +124,35 @@ var vm = function () {
                 return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
             }
         }
-    };
+    }; 
 
-    // start ...
+
+
+    // Check if there is a saved search input and populate the search bar on page load
+    window.onload = function () {
+        const savedSearchInput = localStorage.getItem('searchInputValue');
+        if (savedSearchInput) {
+            document.getElementById('searchInput').value = savedSearchInput;
+        }
+    }
+
+    // Save the search input when the form is submitted
+    document.getElementById('searchForm').addEventListener('submit', function () {
+        const searchInput = document.getElementById('searchInput').value;
+        localStorage.setItem('searchInputValue', searchInput);
+    });
+
+    //--- start ....
     showLoading();
     var pg = getUrlParameter('page');
-    console.log(pg);
+    var q = getUrlParameter('q');
+    console.log(pg, q);
     if (pg == undefined)
         self.activate(1);
     else {
-        self.activate(pg);
+        self.activate(pg, q);
     }
     console.log("VM initialized!");
-
 };
 
 $(document).ready(function () {
@@ -162,4 +162,4 @@ $(document).ready(function () {
 
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
-});
+})

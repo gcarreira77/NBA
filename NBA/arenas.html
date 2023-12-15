@@ -5,36 +5,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>ITW 2023/24 - NBA Arenas List</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../lib/font-awesome/dist/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="myCSS.css" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container d-flex justify-content-between">
-            <a class="navbar-brand" href="index.html" tabindex="NBA">
-                <img src="images.png" height="24" alt="Logo" height="30" class="d-inline-block align-text-top" />
-            </a>
+        <div class="container">
+            <a class="navbar-brand" href="index.html" tabindex="NBA"><img src="../images/NBA_logoH.png" height="24" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="arenas.html"><i class="fa fa-soccer-ball-o text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="arenas.html"><i class="fa fa-soccer-ball-o text-warning"></i> Arenas</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="xxx.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="xxx.html"><i class="fa fa-bookmark-o text-info "></i> Seasons</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="xxx.html"><i class="fa fa-magic" title="The party continues..."></i> &middot;&middot;&middot;</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link ms-auto" aria-current="page" href="favoritos.html">
-                            <i class="fa fa-heart text-danger" title="favs"></i>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -45,14 +37,18 @@
             <h2 data-bind="text: displayName"></h2>
         </div>
         <!-- Add the search bar outside the loop -->
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <input type="text" class="form-control" placeholder="Search name or part" id="procura"/><button type="button" data-bind="click: search">Search</button>
-            </div>
-            <div class="col-md-6 mb-3">
-                <!-- ... your existing pagination controls ... -->
-            </div>
+        <div class=" col-md-4">
+            <form id="searchForm">
+                <input type="hidden" name="page" value="1" />
+                <div class="input-group rounded">
+                    <input type="search" class="form-control rounded" placeholder="Search" id="searchInput" name="q" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn btn-default btn-sm" title="Filtrar">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </form>
         </div>
+
 
         <!-- ko if:records().length > 0 -->
         <div class="row small">
@@ -94,6 +90,22 @@
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
+            <!-- ko if: searchlist().length > 0 -->
+            <tbody data-bind="foreach: searchlist">
+                <tr>
+                    <td class="align-middle" data-bind="text:Id"></td>
+                    <td class="align-middle" data-bind="text:Name"></td>
+                    <td class="align-middle"><a class="nav-link" data-bind="text:StateName, attr: { href:'./stateDetails.html?id=' + StateId }" title="Show State Details"></a></td>
+                    <td class="align-middle"><a class="nav-link" data-bind="text:TeamName, attr: { href:'./teamDetails.html?id=' + TeamId }" title="Show Team Details"></a></td>
+                    <td class="align-middle" data-bind="text:Location"></td>
+                    <td class="text-end">
+                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./arenaDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
+                        <button class="btn btn-default btn-xs"><i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- /ko -->
+            <!-- ko ifnot: searchlist().length > 0 -->
             <tbody data-bind="foreach: records">
                 <tr>
                     <td class="align-middle" data-bind="text:Id"></td>
@@ -107,6 +119,7 @@
                     </td>
                 </tr>
             </tbody>
+            <!-- /ko -->
         </table>
     </div>
     <!-- Modal -->

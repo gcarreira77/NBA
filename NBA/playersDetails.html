@@ -44,41 +44,63 @@
             <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
         </div>
         <!-- ko if:Name().length > 0 -->
-        <div class="row border-bottom g-2">
-            <div class="col-2">Id</div><div class="col-10" data-bind="text: Id"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Name</div><div class="col-10" data-bind="text: Name"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Birthdate</div><div class="col-10" data-bind="text: Birthdate"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Country</div><div class="col-10"><a class="nav-link" data-bind="text:CountryName, attr: { href:'./countryDetails.html?id=' + CountryId }" title="Show Country Details"></a></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">DraftYear</div><div class="col-10" data-bind="text: DraftYear"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Position</div><div class="col-10"><a class="nav-link" data-bind="text:PositionName, attr: { href:'./positionDetails.html?id=' + PositionId }" title="Show Position Details"></a></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Height</div><div class="col-10" data-bind="text: Height"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Weight</div><div class="col-10" data-bind="text: Weight"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">School</div><div class="col-10" data-bind="text: School"></div>
-        </div>
-        <div class="row border-bottom g-2" data-bind="visible: Photo() != '' && Photo() != null">
-            <div class="col-2">Photo</div><div class="small col-10">
-                <img class="img-thumbnail" data-bind="attr:{src: Photo}"><br />
-                <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
+        <div style="display:inline-block">
+            <div style="float:left; width:30%; overflow:hidden">
+                <div class="media-item" data-bind="visible: Photo() != '' && Photo() != null">
+                    <div class="col-2"></div><div class="small col-10">
+                        <img style="height:300px; width: 300px; object-fit: cover;" class="img-thumbnail" data-bind="attr:{src: Photo}"><br />
+                        <i class="fa fa-link" ></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Biography</div><div class="col-10" data-bind="text: Biography"></div>
+            <div style="float:left; width:50%">
+                <table class="table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Id</th>
+                        <td data-bind="text: Id"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Name</th>
+                        <td data-bind="text: Name"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Birthdate</th>
+                        <td data-bind="text: Birthdate"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Country</th>
+                        <td><a class="nav-link" data-bind="text:CountryName, attr: { href:'./countryDetails.html?id=' + CountryId }" title="Show Country Details"></a></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Position</th>
+                        <td><a class="nav-link" data-bind="text:PositionName, attr: { href:'./positionDetails.html?id=' + PositionId }" title="Show Position Details"></a></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">DraftYear</th>
+                        <td data-bind="text: DraftYear"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">School</th>
+                        <td data-bind="text: School"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Height</th>
+                        <td data-bind="text: Height"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Weight</th>
+                        <td data-bind="text: Weight"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Biography</th>
+                        <td data-bind="text: Biography"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+            </div>
         </div>
         <div class="row border-bottom g-2">
             <div class="col-2">Seasons</div>

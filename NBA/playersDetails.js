@@ -22,8 +22,8 @@ var vm = function () {
     self.Photo = ko.observable('');
     self.Biography = ko.observable('');
     self.Seasons = ko.observableArray([])
-    self.Seasons = ko.observable('');
     self.Teams = ko.observableArray([]);
+    self.SeasonTypes = ko.observableArray([]);
     
 
     //--- Page Events

@@ -20,8 +20,8 @@ var vm = function () {
     self.City = ko.observable('');
     self.Logo = ko.observable('');
     self.History = ko.observable('');
-    self.Players = ko.observable('');
-    self.Seasons = ko.observable('');
+    self.Players = ko.observableArray([]);
+    self.Seasons = ko.observableArray([]);
 
     //--- Page Events
     self.activate = function (id) {

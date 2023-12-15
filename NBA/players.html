@@ -43,6 +43,16 @@
         <div class="border-bottom py-2 mb-2">
             <h2 data-bind="text:displayName"></h2>
         </div>
+        <div class=" col-md-4">
+            <form id="searchForm">
+                <input type="hidden" name="page" value="1" />
+                <div class="input-group rounded">
+                    <input type="search" class="form-control rounded" placeholder="Search" id="searchInput" name="q" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn btn-default btn-sm" title="Filtrar"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <a href="players.html" class = "btn btn-default btn-sm" title="Limpar"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </div>
+            </form>
+        </div>
         <!-- ko if:records().length > 0 -->
         <div class="row small">
             <p class=" col-4 mr-auto pt-2">
@@ -84,6 +94,23 @@
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
+            <!-- ko if: searchlist().length > 0 -->
+            <tbody data-bind="foreach: searchlist">
+                <tr>
+                    <td class="align-middle" data-bind="text:Id"></td>
+                    <td class="align-middle" data-bind="text:Name"></td>
+                    <td class="align-middle" data-bind="text:Birthdate"></td>
+                    <td class="align-middle"><a class="nav-link" data-bind="text:CountryName, attr: { href:'./countryDetails.html?id=' + CountryId }" title="Show Country Details"></a></td>
+                    <td class="align-middle"><a class="nav-link" data-bind="text:PositionName, attr: { href:'./positionDetails.html?id=' + PositionId }" title="Show Position Details"></a></td>
+                    <td class="align-middle" data-bind="text:DraftYear"></td>
+                    <td class="text-end">
+                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./playersDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
+                        <button class="btn btn-default btn-xs"><i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- /ko -->
+            <!-- ko ifnot: searchlist().length > 0 -->
             <tbody data-bind="foreach: records">
                 <tr>
                     <td class="align-middle" data-bind="text:Id"></td>
@@ -98,6 +125,7 @@
                     </td>
                 </tr>
             </tbody>
+            <!-- /ko -->
         </table>
     </div>
     <!-- Modal -->

@@ -13,6 +13,7 @@ var vm = function () {
     self.totalRecords = ko.observable(50);
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
+    self.searchlist = ko.observableArray([]);
     self.previousPage = ko.computed(function () {
         return self.currentPage() * 1 - 1;
     }, self);
@@ -43,21 +44,35 @@ var vm = function () {
     };
 
     //--- Page Events
-    self.activate = function (id) {
-        console.log('CALL: getPlayers...');
-        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
-        ajaxHelper(composedUri, 'GET').done(function (data) {
-            console.log(data);
-            hideLoading();
-            self.records(data.Records);
-            self.currentPage(data.CurrentPage);
-            self.hasNext(data.HasNext);
-            self.hasPrevious(data.HasPrevious);
-            self.pagesize(data.PageSize)
-            self.totalPages(data.TotalPages);
-            self.totalRecords(data.TotalRecords);
-            //self.SetFavourites();
-        });
+    self.activate = function (id, q) {
+        if (q == undefined) {
+            console.log('CALL: getArenas...');
+            var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
+            console.log(composedUri)
+            ajaxHelper(composedUri, 'GET').done(function (data) {
+                console.log(data);
+                hideLoading();
+                self.records(data.Records);
+                self.currentPage(data.CurrentPage);
+                self.hasNext(data.HasNext);
+                self.hasPrevious(data.HasPrevious);
+                self.pagesize(data.PageSize)
+                self.totalPages(data.TotalPages);
+                self.totalRecords(data.TotalRecords);
+                //self.SetFavourites();
+            });
+        }
+        else {
+            var composedUri = self.baseUri() + "/Search?q=" + q;
+
+            ajaxHelper(composedUri, 'GET').done(function (data) {
+                console.log(data);
+                self.searchlist(data);
+                hideLoading();
+            });
+        }
+
+
     };
 
     //--- Internal functions
@@ -112,11 +127,12 @@ var vm = function () {
     //--- start ....
     showLoading();
     var pg = getUrlParameter('page');
-    console.log(pg);
+    var q = getUrlParameter('q');
+    console.log(pg, q);
     if (pg == undefined)
         self.activate(1);
     else {
-        self.activate(pg);
+        self.activate(pg, q);
     }
     console.log("VM initialized!");
 };

@@ -127,21 +127,6 @@ var vm = function () {
     }; 
 
 
-
-    // Check if there is a saved search input and populate the search bar on page load
-    window.onload = function () {
-        const savedSearchInput = localStorage.getItem('searchInputValue');
-        if (savedSearchInput) {
-            document.getElementById('searchInput').value = savedSearchInput;
-        }
-    }
-
-    // Save the search input when the form is submitted
-    document.getElementById('searchForm').addEventListener('submit', function () {
-        const searchInput = document.getElementById('searchInput').value;
-        localStorage.setItem('searchInputValue', searchInput);
-    });
-
     //--- start ....
     showLoading();
     var pg = getUrlParameter('page');

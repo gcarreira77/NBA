@@ -21,8 +21,10 @@ var vm = function () {
     self.School = ko.observable('');
     self.Photo = ko.observable('');
     self.Biography = ko.observable('');
+    self.Seasons = ko.observableArray([])
     self.Seasons = ko.observable('');
-    self.Teams = ko.observable('');
+    self.Teams = ko.observableArray([]);
+    
 
     //--- Page Events
     self.activate = function (id) {
@@ -48,6 +50,7 @@ var vm = function () {
             self.Teams(data.Teams);
         });
     };
+    
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {

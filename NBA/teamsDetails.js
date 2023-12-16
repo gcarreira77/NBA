@@ -3,38 +3,38 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Teams/ATL');
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Teams/');
     self.displayName = 'NBA Team Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
     self.Id = ko.observable('');
-    self.Name = ko.observable('');
     self.Acronym = ko.observable('');
+    self.Name = ko.observable('');
     self.ConferenceId = ko.observable('');
     self.ConferenceName = ko.observable('');
     self.DivisionId = ko.observable('');
-    self.DivisionName = ko.observable('');
+    self.DivisionName= ko.observable('');
     self.StateId = ko.observable('');
     self.StateName = ko.observable('');
     self.City = ko.observable('');
     self.Logo = ko.observable('');
     self.History = ko.observable('');
-    self.Players = ko.observableArray([]);
-    self.Seasons = ko.observableArray([]);
+    self.Players = ko.observable('');
+    self.Seasons = ko.observable('');
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getTeams...');
+        console.log('CALL: getTeam...');
         var composedUri = self.baseUri() + id;
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
             self.Id(data.Id);
-            self.Name(data.Name);
             self.Acronym(data.Acronym);
+            self.Name(data.Name);
             self.ConferenceId(data.ConferenceId);
-            self.ConferenceName(data.ConferenceName);
+            self.ConferenceId(data.ConferenceId);
             self.DivisionId(data.DivisionId);
             self.DivisionName(data.DivisionName);
             self.StateId(data.StateId);

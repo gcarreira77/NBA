@@ -23,7 +23,7 @@ var vm = function () {
     self.Biography = ko.observable('');
     self.Seasons = ko.observableArray([])
     self.Teams = ko.observableArray([]);
-    self.SeasonTypes = ko.observableArray([]);
+    self.SeasonTypes = ko.observable('');
     
 
     //--- Page Events

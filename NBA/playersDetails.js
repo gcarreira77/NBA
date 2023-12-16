@@ -1,4 +1,4 @@
-﻿// ViewModel KnockOut
+﻿// Player ViewModel
 var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
@@ -23,7 +23,6 @@ var vm = function () {
     self.Biography = ko.observable('');
     self.Seasons = ko.observableArray([])
     self.Teams = ko.observableArray([]);
-    self.SeasonTypes = ko.observable('');
     
 
     //--- Page Events
@@ -48,6 +47,7 @@ var vm = function () {
             self.Biography(data.Biography);
             self.Seasons(data.Seasons);
             self.Teams(data.Teams);
+
         });
     };
     
@@ -96,6 +96,8 @@ var vm = function () {
         }
     };
 
+    
+
     //--- start ....
     showLoading();
     var pg = getUrlParameter('id');
@@ -108,11 +110,97 @@ var vm = function () {
     console.log("VM initialized!");
 };
 
+
+// Team ViewModel
+var viewm = function () {
+    console.log('ViewModel initiated...');
+    //---Variáveis locais
+    var self = this;
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Statistics/NumPlayersBySeason');
+    self.displayName = 'NBA Players Details';
+    self.error = ko.observable('');
+    self.passingMessage = ko.observable('');
+    //--- Data Record
+    self.SeasonType = ko.observable('');
+    self.Season = ko.observableArray([])
+    self.Players = ko.observableArray([]);
+    
+
+    //--- Page Events
+    self.activate = function (id) {
+        console.log('CALL: getStats...');
+        var composedUri = self.baseUri() + id;
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log(data);
+            hideLoading();
+            self.Season(data.Season);
+            self.SeasonType(data.SeasonType);
+            self.Players(data.Players);
+
+        });
+    };
+    
+
+    //--- Internal functions
+    function ajaxHelper(uri, method, data) {
+        self.error(''); // Clear error message
+        return $.ajax({
+            type: method,
+            url: uri,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: data ? JSON.stringify(data) : null,
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Call[" + uri + "] Fail...");
+                hideLoading();
+                self.error(errorThrown);
+            }
+        });
+    }
+
+    function showLoading() {
+        $('#myModal').modal('show', {
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+    function hideLoading() {
+        $('#myModal').on('shown.bs.modal', function (e) {
+            $("#myModal").modal('hide');
+        })
+    }
+
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+
+}
+
 $(document).ready(function () {
     console.log("document.ready!");
-    ko.applyBindings(new vm());
+
+    // Create instances of both view models
+    var playerVM = new vm();
+    var statVM = new viewm();
+
+    // Apply bindings for both view models
+    ko.applyBindings(vm, document.getElementById('players'));
+    ko.applyBindings(viewm, document.getElementById('stats'));
 });
 
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
-})
+});
+

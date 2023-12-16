@@ -121,9 +121,9 @@ var viewm = function () {
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
-    self.SeasonType = ko.observable('');
+    self.SeasonType = ko.observableArray([]);
     self.Season = ko.observableArray([])
-    self.Players = ko.observableArray([]);
+    self.Players = ko.observable('');
     
 
     //--- Page Events

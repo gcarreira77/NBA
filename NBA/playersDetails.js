@@ -23,27 +23,15 @@ var vm = function () {
     self.Biography = ko.observable('');
     self.Seasons = ko.observableArray([])
     self.Teams = ko.observableArray([]);
-    
-    self.stats = function (id) {
-        var statUri = 'http://192.168.160.58/NBA/API/Statistics/NumPlayersBySeason';
-        self.SeasonType = ko.observableArray([]);
-        self.Season = ko.observableArray([])
-        self.Players = ko.observable('');
-        ajaxHelper(statUri, 'GET').done(function (statData) {
-            console.log(statData);
-            hideLoading();
-            self.Season(data.Season);
-            self.SeasonType(data.SeasonType);
-            self.Players(data.Players);
-        });
-    };
-
-
+    self.teamId = ko.observable('');
+    self.seasonId = ko.observable('');
+    var resultsArray = [];
 
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getPlayers...');
         var composedUri = self.baseUri() + id;
+        
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
@@ -62,11 +50,44 @@ var vm = function () {
             self.Biography(data.Biography);
             self.Seasons(data.Seasons);
             self.Teams(data.Teams);
-            self.stats(id);
+    
+            // Define the stats function outside of the loops
+            self.stats = function () {
+                var resultsArray = [];
+                
+                self.Teams().forEach(function (team) {
+                    self.teamId(team.Id);
+    
+                    self.Seasons().forEach(function (currentSeason) {
+                        self.seasonId(currentSeason.Id);
+    
+                        var statUri = 'http://192.168.160.58/NBA/api/Statistics/PlayersBySeason?seasonId=' + self.seasonId() + "&teamid=" + self.teamId();
+                        
+                        ajaxHelper(statUri, 'GET').done(function (data) {
+                            console.log(data);
+                            hideLoading();
+                            var seasonType = data.SeasonType;
+                            var players = data.Players;
+    
+                            if (seasonType === "playoff" && players.some(player => player.Name === self.Name())) {
+                                var result = {
+                                    Season: data.Season
+                                };
+                                resultsArray.push(result);
+                            }
+                        });
+                    });
+                });
+    
 
+            };
+    
+            // Call the stats function
+            self.stats();
+            console.log(resultsArray)
         });
     };
-    
+
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {

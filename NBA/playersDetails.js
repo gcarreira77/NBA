@@ -25,7 +25,7 @@ var vm = function () {
     self.Teams = ko.observableArray([]);
     
     self.stats = function (id) {
-        var statUri = 'http://192.168.160.58/NBA/API/Statistics/NumPlayersBySeason' + id;
+        var statUri = 'http://192.168.160.58/NBA/API/Statistics/NumPlayersBySeason';
         self.SeasonType = ko.observableArray([]);
         self.Season = ko.observableArray([])
         self.Players = ko.observable('');
@@ -37,6 +37,7 @@ var vm = function () {
             self.Players(data.Players);
         });
     };
+
 
 
     //--- Page Events

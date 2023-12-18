@@ -56,7 +56,7 @@ var vm = function () {
                 self.currentPage(data.CurrentPage);
                 self.hasNext(data.HasNext);
                 self.hasPrevious(data.HasPrevious);
-                self.pagesize(data.PageSize)
+                self.pagesize(data.PageSize);
                 self.totalPages(data.TotalPages);
                 self.totalRecords(data.TotalRecords);
                 //self.SetFavourites();
@@ -71,8 +71,6 @@ var vm = function () {
                 hideLoading();
             });
         }
-
-
     };
 
     //--- Internal functions
@@ -106,7 +104,7 @@ var vm = function () {
     function hideLoading() {
         $('#myModal').on('shown.bs.modal', function (e) {
             $("#myModal").modal('hide');
-        })
+        });
     }
 
     function getUrlParameter(sParam) {

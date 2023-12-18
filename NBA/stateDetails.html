@@ -58,8 +58,9 @@
             <div class="col-2">Arenas</div><div class="col-10" data-bind="text: Arenas"></div>
         </div>
         <!-- /ko -->
-        <div class="row border-bottom g-2" data-bind="visible: Photo() != '' && Photo() != null">
-            <div class="col-2">Flag</div><div class="small col-10">
+        <div class="row border-bottom g-2" data-bind="visible: Flag() != '' && Flag() != null">
+            <div class="col-2">Flag</div>
+            <div class="small col-10">
                 <img class="img-thumbnail" data-bind="attr:{src: Flag}"><br />
                 <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Flag }, text: Flag" target="_blank"></a>]
             </div>
@@ -97,6 +98,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
 
     
-    <script src="arenaDetails.js"></script>
+    <script src="stateDetails.js"></script>
 </body>
 </html>

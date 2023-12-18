@@ -52,8 +52,9 @@
         <div class="row border-bottom g-2">
             <div class="col-2">State</div><div class="col-10"><a class="nav-link" data-bind="text:StateName, attr: { href:'./stateDetails.html?id=' + StateId }" title="Show State Details"></a></div>
         </div>
-        <div class="row border-bottom g-2" data-bind="visible: Logo() != '' && Logo() != null">
-            <div class="col-2">Logo</div><div class="small col-10">
+        <div style="max-width: 200px; max-height: 200px; gap: 30px; padding-bottom: 10px; display: flex; flex-direction: column; align-items: center;" class="row border-bottom g-2" data-bind="visible: Logo() != '' && Logo() != null">
+            <div class="col-12 text-center" style="gap: 10px; padding-bottom: 10px;">Logo</div>
+            <div class="small col-12 text-center">
                 <img class="img-thumbnail" data-bind="attr:{src: Logo}"><br />
                 <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Logo }, text: Logo" target="_blank"></a>]
             </div>

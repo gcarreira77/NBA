@@ -13,6 +13,18 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="myCSS.css" />
+
+    <style>
+      .logo-container {
+          width: 15px; /* Adjust the width as needed */
+          height: 15px; /* Adjust the height as needed */
+          background-image: url('path/to/your/logo.png'); /* Replace 'path/to/your/logo.png' with the actual path to your logo image */
+          background-size: cover; /* You can use 'contain' if you want the entire image to fit within the container */
+          background-position: center; /* Center the image within the container */
+          background-repeat: no-repeat; /* Prevent the image from repeating */
+      }
+  </style>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -102,12 +114,18 @@
                   </table>
             </div>
             <div style="float:left; width:30% ">
-                <div data-bind="foreach: Teams">
-                <table class="table">
-                    <tr data-bind="text: Acronym "></tr>
-                </table>
-                </div>
-            </div>
+              <div data-bind="foreach: Teams">
+                  <table class="table">
+                      <tr >
+                          <td>
+                              <img data-bind="attr: { src: Logo }" alt="Team Logo" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+          </div>
+            
+            
         </div>
         <div class="container mt-4">
             <ul class="nav nav-tabs" id="myTabs">
@@ -174,7 +192,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <img src="../images/NBA_logoH.png" height="30" /> Loading data...
+                        <img src="images.png" height="30" /> Loading data...
                     </h5>
                 </div>
                 <div class="modal-body text-center">

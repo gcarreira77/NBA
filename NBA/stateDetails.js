@@ -3,8 +3,8 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Arenas/');
-    self.displayName = 'NBA Arena Details';
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/States/');
+    self.displayName = 'NBA States Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
@@ -24,8 +24,7 @@ var vm = function () {
             self.Id(data.Id);
             self.Name(data.Name);
             self.Flag(data.Flag);
-            self.StateName(data.StateName);
-            self.Teams(data.TeamId);
+            self.Teams(data.Teams);
             self.Arenas(data.Arenas);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX Call[" + composedUri + "] Fail...");

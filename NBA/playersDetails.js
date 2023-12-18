@@ -35,6 +35,7 @@ var vm = function () {
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
+        
             self.Id(data.Id);
             self.Name(data.Name);
             self.Birthdate(data.Birthdate);
@@ -46,10 +47,17 @@ var vm = function () {
             self.Height(data.Height);
             self.Weight(data.Weight);
             self.School(data.School);
-            self.Photo(data.Photo);
+            self.Photo(data.Photo)
+            // Check if self.Photo is falsy or empty
+            if (!self.Photo()) {
+                // Assign the default image URL
+                self.Photo("https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg");
+            }
+        
             self.Biography(data.Biography);
             self.Seasons(data.Seasons);
             self.Teams(data.Teams);
+        
     
             // Define the stats function outside of the loops
             self.stats = function () {

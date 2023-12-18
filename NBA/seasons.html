@@ -14,21 +14,28 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="arenas.html"><i class="fa fa-soccer-ball-o text-warning"></i> Arenas</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="states.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="seasons.html"><i class="fa fa-bookmark-o text-info "></i> Seasons</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="grafico1.html"><i class="fa fa-magic" title="The party continues..."></i> &middot;&middot;&middot;</a></li>
-                <li class="nav-item">
-                    <a class="nav-link ms-auto" aria-current="page" href="favoritos.html">
-                        <i class="fa fa-heart text-danger" title="favs"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="index.html" tabindex="NBA">
+                <img src="images.png" height="24" alt="Logo" height="30" class="d-inline-block align-text-top" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="arenas.html"><i class="fa fa-soccer-ball-o text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="states.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="seasonsindex.html"><i class="fa fa-bookmark-o text-info "></i> Seasons</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="grafico1.html"><i class="fa fa-magic" title="The party continues..."></i> &middot;&middot;&middot;</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link ms-auto" aria-current="page" href="favoritos.html">
+                            <i class="fa fa-heart text-danger" title="favs"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
     </nav>
     <!-- Working Area -->
     <div class="container">
@@ -89,7 +96,7 @@
             <tbody data-bind="foreach: searchlist">
                 <tr>
                     <td class="align-middle" data-bind="text:Id"></td>
-                    <td class="align-middle" data-bind="text:Name"></td>
+                    <td class="align-middle" data-bind="text:Season"></td>
                     <td class="text-end">
                         <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./seasonsDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
                         <button class="btn btn-default btn-xs"><i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
@@ -110,6 +117,7 @@
             </tbody>
             <!-- /ko -->
         </table>
+        <a href="./seasonsindex.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -43,8 +43,10 @@ var vm = function () {
         return list;
     };
 
+
     //--- Page Events
     self.activate = function (id, q) {
+        
         if (q == undefined) {
             console.log('CALL: getSeasons...');
             var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
@@ -71,7 +73,7 @@ var vm = function () {
                 hideLoading();
             });
         }
-
+    
 
     };
 
@@ -128,9 +130,24 @@ var vm = function () {
 
 
     //--- start ....
+    function handleLinkClick(event) {
+        event.preventDefault();
+
+        // Extract the value from the clicked link
+        var valueFromLink = $(this).data('value');
+
+        // Update the q parameter and activate the ViewModel
+        self.activate(1, valueFromLink);
+        
+        window.location.href = "C:/Users/Guilherme/Documents/GitHub/NBA/NBA/seasons.html?page=1&q=" + valueFromLink;
+    }
+
+    // Attach click event handler to links with a specific class
+    $('.search-link').on('click', handleLinkClick);
+
     showLoading();
+    var q = getUrlParameter('q')
     var pg = getUrlParameter('page');
-    var q = getUrlParameter('q');
     console.log(pg, q);
     if (pg == undefined)
         self.activate(1);

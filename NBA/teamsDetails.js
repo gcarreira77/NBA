@@ -1,7 +1,7 @@
 ﻿// ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
-    //---Variáveis locais
+    //--- Local variables
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Teams/');
     self.displayName = 'NBA Team Details';
@@ -24,16 +24,14 @@ var vm = function () {
     self.Seasons = ko.observable('');
 
     //--- Page Events
-    self.activate = function (id) {
+    self.activate = function (id, acronym) {
         console.log('CALL: getTeam...');
-        var composedUri = self.baseUri() + id;
+        var composedUri = self.baseUri() + id + '?acronym=' + acronym;
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
-            hideLoading();
             self.Id(data.Id);
             self.Acronym(data.Acronym);
             self.Name(data.Name);
-            self.ConferenceId(data.ConferenceId);
             self.ConferenceId(data.ConferenceId);
             self.DivisionId(data.DivisionId);
             self.DivisionName(data.DivisionName);
@@ -50,18 +48,24 @@ var vm = function () {
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
-        return $.ajax({
+        var ajaxRequest = $.ajax({
             type: method,
             url: uri,
             dataType: 'json',
             contentType: 'application/json',
-            data: data ? JSON.stringify(data) : null,
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("AJAX Call[" + uri + "] Fail...");
-                hideLoading();
-                self.error(errorThrown);
-            }
+            data: data ? JSON.stringify(data) : null
         });
+    
+        ajaxRequest.fail(function (jqXHR, textStatus, errorThrown) {
+            console.log("AJAX Call[" + uri + "] Fail...");
+            self.error(errorThrown);
+        });
+    
+        ajaxRequest.always(function () {
+            hideLoading();  // This line is now outside the error callback
+        });
+    
+        return ajaxRequest;
     }
 
     function showLoading() {
@@ -93,14 +97,17 @@ var vm = function () {
 
     //--- start ....
     showLoading();
-    var pg = getUrlParameter('id');
-    console.log(pg);
-    if (pg == undefined)
-        self.activate(1);
-    else {
-        self.activate(pg);
+    var teamId = getUrlParameter('id');
+    var teamAcronym = getUrlParameter('acronym');
+    console.log(teamId);
+    console.log(teamAcronym);
+    if (teamId === undefined || teamAcronym === undefined) {
+        self.activate(1, 'defaultAcronym');
+    } else {
+        self.activate(teamId, teamAcronym);
     }
     console.log("VM initialized!");
+
 };
 
 $(document).ready(function () {
@@ -110,4 +117,4 @@ $(document).ready(function () {
 
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
-})
+});

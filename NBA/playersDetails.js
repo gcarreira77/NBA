@@ -51,7 +51,7 @@ var vm = function () {
             // Check if self.Photo is falsy or empty
             if (!self.Photo()) {
                 // Assign the default image URL
-                self.Photo("https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg");
+                self.Photo("https://upload.wikimedia.org/wikipedia/commons/3/34/PICA.jpg");
             }
         
             self.Biography(data.Biography);

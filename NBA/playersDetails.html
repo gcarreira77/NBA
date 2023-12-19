@@ -58,71 +58,77 @@
             <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
         </div>
         <!-- ko if:Name().length > 0 -->
-        <div style="display:inline-block">
-            <div style="float:left; width:30%; overflow:hidden">
-                <div class="media-item" data-bind="visible: Photo() != '' && Photo() != null">
-                    <div class="col-2"></div><div class="small col-10">
-                        <img style="height:300px; width: 300px; object-fit: cover;" class="img-thumbnail" data-bind="attr:{src: Photo}"><br />
-                        <i class="fa fa-link" ></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
-                    </div>
-                </div>
-            </div>
-            <div style="float:left; width:40%">
-                <table class="table">
-                    <tbody>
-                      <tr>
-                        <th scope="row">Id</th>
-                        <td data-bind="text: Id"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Name</th>
-                        <td data-bind="text: Name"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Birthdate</th>
-                        <td data-bind="text: Birthdate"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Country</th>
-                        <td><a class="nav-link" data-bind="text:CountryName, attr: { href:'./countryDetails.html?id=' + CountryId }" title="Show Country Details"></a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Position</th>
-                        <td><a class="nav-link" data-bind="text:PositionName, attr: { href:'./positionDetails.html?id=' + PositionId }" title="Show Position Details"></a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">DraftYear</th>
-                        <td data-bind="text: DraftYear"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">School</th>
-                        <td data-bind="text: School"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Height</th>
-                        <td data-bind="text: Height"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Weight</th>
-                        <td data-bind="text: Weight"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Biography</th>
-                        <td data-bind="text: Biography"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-            <div style="float:left; width:30% ">
-              <div data-bind="foreach: Teams">
-                  <table class="table">
-                      <tr >
-                          <td>
-                              <img data-bind="attr: { src: Logo }" alt="Team Logo" />
-                          </td>
-                      </tr>
-                  </table>
+              <div class="row">
+                  <div class="col-md-3">
+                      <div class="media-item" data-bind="visible: Photo() != '' && Photo() != null">
+                          <div class="col-2"></div>
+                          <div class="small col-10">
+                              <img style="height:300px; width: 300px; object-fit: cover;" class="img-thumbnail" data-bind="attr:{src: Photo}">
+                              <br />
+                              <i class="fa fa-link"></i>
+                              [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
+                          </div>
+                      </div>
+                  </div>
+          
+                  <div class="col-md-6">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <th scope="row">Id</th>
+                          <td data-bind="text: Id"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Name</th>
+                          <td data-bind="text: Name"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Birthdate</th>
+                          <td data-bind="text: Birthdate"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Country</th>
+                          <td><a class="nav-link" data-bind="text:CountryName, attr: { href:'./countryDetails.html?id=' + CountryId }" title="Show Country Details"></a></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Position</th>
+                          <td><a class="nav-link" data-bind="text:PositionName, attr: { href:'./positionDetails.html?id=' + PositionId }" title="Show Position Details"></a></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">DraftYear</th>
+                          <td data-bind="text: DraftYear"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">School</th>
+                          <td data-bind="text: School"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Height</th>
+                          <td data-bind="text: Height"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Weight</th>
+                          <td data-bind="text: Weight"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Biography</th>
+                          <td data-bind="text: Biography"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+          
+                  <div class="col-md-3">
+                      <div class="row">
+                          <div data-bind="foreach: Teams">
+                              <div class="col-md-4">
+                                  <img data-bind="attr: { src: Logo }" class="card-img-top" alt="Card image cap" style="width: 10rem; height: 10rem;" />
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
+              <!--/ko-->
           </div>
             
             

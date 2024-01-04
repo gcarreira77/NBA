@@ -69,7 +69,7 @@ var vm = function () {
                     // Check and categorize seasons based on SeasonType
                     data.forEach(function (season) {
                         if (season.SeasonType === 'Playoffs') {
-                            self.playoffSeasons.push(season);
+                            self.playoffSeasons.push(season)
                         } else if (season.SeasonType === 'Regular Season') {
                             self.regularSeasons.push(season);
                         }

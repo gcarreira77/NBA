@@ -23,8 +23,9 @@ var vm = function () {
     self.Biography = ko.observable('');
     self.Seasons = ko.observableArray([])
     self.Teams = ko.observableArray([]);
-    self.teamId = ko.observable('');
-    self.seasonId = ko.observable('');
+    self.regularSeasons = ko.observableArray([]);
+    self.playoffSeasons = ko.observableArray([]);
+
     var resultsArray = [];
 
     //--- Page Events
@@ -53,46 +54,37 @@ var vm = function () {
                 // Assign the default image URL
                 self.Photo("https://upload.wikimedia.org/wikipedia/commons/3/34/PICA.jpg");
             }
-        
             self.Biography(data.Biography);
             self.Seasons(data.Seasons);
             self.Teams(data.Teams);
         
-    
+
             // Define the stats function outside of the loops
             self.stats = function () {
-                var resultsArray = [];
-                
-                self.Teams().forEach(function (team) {
-                    self.teamId(team.Id);
-    
-                    self.Seasons().forEach(function (currentSeason) {
-                        self.seasonId(currentSeason.Id);
-    
-                        var statUri = 'http://192.168.160.58/NBA/api/Statistics/PlayersBySeason?seasonId=' + self.seasonId() + "&teamid=" + self.teamId();
-                        
-                        ajaxHelper(statUri, 'GET').done(function (data) {
-                            console.log(data);
-                            hideLoading();
-                            var seasonType = data.SeasonType;
-                            var players = data.Players;
-    
-                            if (seasonType === "playoff" && players.some(player => player.Name === self.Name())) {
-                                var result = {
-                                    Season: data.Season
-                                };
-                                resultsArray.push(result);
-                            }
-                        });
+                var statUri = 'http://192.168.160.58/NBA/api/Statistics/PlayerRankBySeason?playerId=' + self.Id();
+                ajaxHelper(statUri, 'GET').done(function (data) {
+                    console.log(data);
+                    hideLoading();
+        
+                    // Check and categorize seasons based on SeasonType
+                    data.forEach(function (season) {
+                        if (season.SeasonType === 'Playoffs') {
+                            self.playoffSeasons.push(season);
+                        } else if (season.SeasonType === 'Regular Season') {
+                            self.regularSeasons.push(season);
+                        }
+                        // Add more conditions if there are other types of seasons
                     });
+        
+                    // Now self.playoffSeasons and self.regularSeasons contain the categorized seasons
+                    console.log("Playoff Seasons:", self.playoffSeasons());
+                    console.log("Regular Seasons:", self.regularSeasons());
                 });
-    
-
             };
-    
+        
             // Call the stats function
             self.stats();
-            console.log(resultsArray)
+            
         });
     };
 

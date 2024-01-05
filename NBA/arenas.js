@@ -60,7 +60,6 @@ var vm = function () {
                 self.totalPages(data.TotalPages);
                 self.totalRecords(data.TotalRecords);
                 setFavs(data.Records)
-                //self.SetFavourites();
             });
         }
         else {

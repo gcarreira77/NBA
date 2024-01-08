@@ -58,25 +58,25 @@ var vm = function () {
             self.Seasons(data.Seasons);
             self.Teams(data.Teams);
         
-            //self.statistics = function () {
-              //  self.Seasons().forEach(function (currentSeason) {
-                //    var seasonId = currentSeason.Id;
+            self.statistics = function () {
+                self.Seasons().forEach(function (currentSeason) {
+                    var seasonId = currentSeason.Id;
 
-                  //  var statUri = 'http://192.168.160.58/NBA/api/Players/Statistics?id='+ self.Id() + '&seasonId=' + seasonId;  
-                    //ajaxHelper(statUri, 'GET').done(function (data) {
-                      //  console.log(data);
-                        //hideLoading();
+                    var statUri = 'http://192.168.160.58/NBA/api/Players/Statistics?id='+ self.Id() + '&seasonId=' + seasonId;  
+                    ajaxHelper(statUri, 'GET').done(function (data) {
+                        console.log(data);
+                        hideLoading();
 
-                        //data.forEach(function (season) {
-                          //  if (season.Regular.SeasonType === 'Regular Season') {
-                            //    self.reg.push(season)
-                            //} else if (season.Playoff.SeasonType === 'Playoffs') {
-                              //   self.pl.push(season);
-                            //}
-                        //});
-                    //})
-                //})
-            //}
+                        data.forEach(function (season) {
+                            if (season.Regular.SeasonType === 'Regular Season') {
+                                self.reg.push(season)
+                            } else if (season.Playoff.SeasonType === 'Playoffs') {
+                                 self.pl.push(season);
+                            }
+                        });
+                    })
+                })
+            }
 
 
 

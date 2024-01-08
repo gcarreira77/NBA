@@ -124,6 +124,19 @@ var vm = function () {
         var modalId = 'exampleModal_' + self.regular.indexOf(self.selectedRegularSeason());
         $('#' + modalId).modal('hide');
     };
+    
+    self.selectedplayoff = ko.observable();
+
+    self.abrirModal = function (playoff) {
+        self.selectedplayoff(playoff);  
+        var modalId = 'Modal_' + self.playoff.indexOf(playoff);
+        $('#' + modalId).modal('show');
+    };
+
+    self.fecharModal = function () {
+        var modalId = 'Modal_' + self.playoff.indexOf(self.selectedplayoff());
+        $('#' + modalId).modal('hide');
+    };
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {

@@ -23,10 +23,9 @@ var vm = function () {
     self.Biography = ko.observable('');
     self.Seasons = ko.observableArray([])
     self.Teams = ko.observableArray([]);
-    self.regularSeasons = ko.observableArray([]);
-    self.playoffSeasons = ko.observableArray([]);
-    self.pl = ko.observableArray([]);
-    self.reg = ko.observableArray([]); 
+    self.regular = ko.observableArray([]);
+    self.playoff = ko.observableArray([]);
+  
 
     //--- Page Events
     self.activate = function (id) {
@@ -58,59 +57,73 @@ var vm = function () {
             self.Seasons(data.Seasons);
             self.Teams(data.Teams);
         
-            self.statistics = function () {
+            self.statistics = async function () {
+                var seasons = [];
                 self.Seasons().forEach(function (currentSeason) {
-                    var seasonId = currentSeason.Id;
-
-                    var statUri = 'http://192.168.160.58/NBA/api/Players/Statistics?id='+ self.Id() + '&seasonId=' + seasonId;  
-                    ajaxHelper(statUri, 'GET').done(function (data) {
-                        console.log(data);
-                        hideLoading();
-
-                        data.forEach(function (season) {
-                            if (season.Regular.SeasonType === 'Regular Season') {
-                                self.reg.push(season)
-                            } else if (season.Playoff.SeasonType === 'Playoffs') {
-                                 self.pl.push(season);
-                            }
-                        });
-                    })
+                   seasons.push(currentSeason)
                 })
-            }
+                
+                console.log(seasons)
+
+                for (var i = 0; i < seasons.length; i++) {
+                    var seasonId = seasons[i].Id;
+                
+                    var statUri = 'http://192.168.160.58/NBA/api/Players/Statistics?id='+ self.Id() + '&seasonId=' + seasonId;  
+                
+                    ajaxHelper(statUri, 'GET').done(function (data) {
+                        hideLoading();
+                        
+                        var regularSeason = {
+                            Season:  seasons[i].Season,
+                            Regular: data.Regular,
+                            Acronym:  data.Acronym
+                        }
+
+                        self.regular.push(regularSeason);
+                        if (data.Playoff.Rank === null){
+                        } else {
+                            var playoffSeason = {
+                                Season:  seasons[i].Season,
+                                Playoff: data.Playoff,
+                                Acronym:  data.Acronym
+                            }
+                            self.playoff.push(playoffSeason);
+                        }
 
 
+                        
+                        
+                    });
+                
+                    await wait(100);
+                }
+                console.log(self.regular());
+                console.log(self.playoff());
+
+
+                
+                
+                }
+            async function wait(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }            
 
             self.statistics();
 
-        
-            self.stats = function () {
-                var statUri = 'http://192.168.160.58/NBA/api/Statistics/PlayerRankBySeason?playerId=' + self.Id();
-                ajaxHelper(statUri, 'GET').done(function (data) {
-                    console.log(data);
-                    hideLoading();
-        
-                    // Check and categorize seasons based on SeasonType
-                    data.forEach(function (season) {
-                        if (season.SeasonType === 'Playoffs') {
-                            self.playoffSeasons.push(season)
-                        } else if (season.SeasonType === 'Regular Season') {
-                            self.regularSeasons.push(season);
-                        }
-                        // Add more conditions if there are other types of seasons
-                    });
-        
-                    // Now self.playoffSeasons and self.regularSeasons contain the categorized seasons
-                    console.log("Playoff Seasons:", self.playoffSeasons());
-                    console.log("Regular Seasons:", self.regularSeasons());
-                });
-            };
-        
-            // Call the stats function
-            self.stats();
             
         });
     };
+    self.selectedRegularSeason = ko.observable();
+    self.openModal = function (regularSeason) {
+        self.selectedRegularSeason(regularSeason);
+        var modalId = 'exampleModal_' + self.regular.indexOf(regularSeason);
+        $('#' + modalId).modal('show');
+    };
 
+    self.closeModal = function () {
+        var modalId = 'exampleModal_' + self.regular.indexOf(self.selectedRegularSeason());
+        $('#' + modalId).modal('hide');
+    };
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {

@@ -71,9 +71,39 @@ var vm = function () {
                 hideLoading();
             });
         }
+        self.favorite = function (item){
+            let localFavs = JSON.parse(localStorage.getItem("favorites_players")) || [];
+            console.log(localFavs)
+            console.log(item)
+            const isFav = localFavs.some((fav) => fav.Id === item.Id)
+            console.log(isFav)
+            if (isFav){
+                localFavs = localFavs.filter((fav) => fav.Id !== item.Id)
+            } else {
+                localFavs.push(item)
+            }
+            localStorage.setItem("favorites_players", JSON.stringify(localFavs));
+            toggleFavClass(item.Id)
+        }
 
 
     };
+
+    function setFavs(records){
+        let localFavs = JSON.parse(localStorage.getItem("favorites_players")) || [];
+        for (let i = 0; i < records.length; i++){
+            let isFav = localFavs.some((fav) => fav.Id === records[i].Id)
+            if (isFav){
+                toggleFavClass(records[i].Id)
+            }
+        }
+        return records;
+    }
+
+    function toggleFavClass(id){
+        console.log($(`#favouite_${id}`))
+        $(`#favourite_${id}`).toggleClass("fa-heart fa-heart-o text-danger")
+    }
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {

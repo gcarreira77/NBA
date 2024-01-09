@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="myCSS.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -73,6 +78,19 @@
                 <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
             </div>
         </div>
+
+       
+
+        <div>
+            <div id="map">Maps</div>
+            
+            <iframe width="800" height="480" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+                data-bind="attr: { src: mapUrl() }" 
+                style="border: 1px solid black">
+            </iframe><br />
+        </div>
+
+
         <!-- /ko -->
         <a href="./arenas.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
@@ -91,6 +109,9 @@
             </div>
         </div>
     </div>
+
+
+
     <!-- End of Work Area -->
     <nav class="navbar navbar-light bg-light fixed-bottom">
         <div class="container small">
@@ -107,5 +128,7 @@
 
     
     <script src="arenaDetails.js"></script>
+    <script src="Maps.js"></script>
+
 </body>
 </html>

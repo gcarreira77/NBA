@@ -12,13 +12,21 @@ var vm = function () {
     self.Name = ko.observable('');
     self.StateId = ko.observable('');
     self.StateName = ko.observable('');
-    self.TeamId = ko.observable('');
+    self.TeamId = ko.observable('');6
     self.TeamName = ko.observable('');
     self.TeamAcronym = ko.observable('');
+    self.Lat = ko.observable('');
+    self.Lon = ko.observable('');
     self.Location = ko.observable('');
     self.Capacity = ko.observable('');
     self.Opened = ko.observable('');
     self.Photo = ko.observable('');
+
+    self.mapUrl = ko.pureComputed(function() {
+        return 'https://www.openstreetmap.org/export/embed.html?bbox=' + self.Lat() + ',' + self.Lon() + ',' + (parseFloat(self.Lat()) + 0.01) + ',' + (parseFloat(self.Lon()) + 0.01) + '&layer=mapnik&marker=' + self.Lat() + ',' + self.Lon();
+    });
+
+
 
     //--- Page Events
     self.activate = function (id) {
@@ -33,13 +41,23 @@ var vm = function () {
             self.StateName(data.StateName);
             self.TeamId(data.TeamId);
             self.TeamName(data.TeamName);
+            self.Lat(data.Lat);
+            self.Lon(data.Lon);
+            console.log(data.Lat, data.Lon)
+
             self.TeamAcronym(data.TeamAcronym);
             self.Location(data.Location);
             self.Capacity(data.Capacity);
             self.Opened(data.Opened);
             self.Photo(data.Photo);
+
+            console.log(self.mapUrl());
         });
     };
+    self.mapUrl = ko.pureComputed(function() {
+        return 'https://www.openstreetmap.org/export/embed.html?bbox=-125.0,24.396308,-66.934570,49.384358&layer=mapnik&marker=' + self.Lat() + ',' + self.Lon();
+    });    
+
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {

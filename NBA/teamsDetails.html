@@ -61,6 +61,16 @@
         </div>
 
         <a href="./teams.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+        <table>
+            <thead>
+              <th>Seasons</th>
+            </thead>
+            <tbody data-bind="foreach: Seasons">
+                <tr>
+                    <td data-bind="text: Season"></td>
+                </tr>
+            </tbody>    
+        </table>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

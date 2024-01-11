@@ -1,0 +1,151 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ITW 2023/24 - NBA Season Team Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="myCSS.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+    <style>
+        body {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            height: 100vh;
+        }
+    
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+    
+        /* Center and fit the background image without repeating */
+        .blur-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0; /* Lower z-index to ensure it's behind the content */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px);
+        }
+        
+    </style>
+
+</head>
+<body data-bind="style: { 'position': 'relative' }">
+    <div class="blur-background" data-bind="style: { 'background-image': 'url(' + Logo() + ')' }"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="index.html" tabindex="NBA">
+                <img src="images.png" height="24" alt="Logo" height="30" class="d-inline-block align-text-top" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="arenas.html"><i class="fa fa-soccer-ball-o text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="states.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="seasonsindex.html"><i class="fa fa-bookmark-o text-info "></i> Seasons</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="grafico1.html"><i class="fa fa-magic" title="The party continues..."></i> &middot;&middot;&middot;</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link ms-auto" aria-current="page" href="favoritos.html">
+                            <i class="fa fa-heart text-danger" title="favs"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+    <!-- Work Area-->
+    <div class="container">
+        <div class=" border-bottom mb-3">
+            <h2 data-bind="text: Name() + ' ' + Regular().Season + ' Season'"></h2>
+        </div>
+        <div class="py-2 border-bottom mb-3">
+            <h2 data-bind="text: Name() + ' ' + Regular().Season + ' Season'"></h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4" style="display: inline-block;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Regular Season</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Regular().Players">
+                        <tr>
+                            <td data-bind="text: Name"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="col-md-4" style="display: inline-block;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Playoffs</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Playoff().Players">
+                        <tr>
+                            <td data-bind="text: Name"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        
+    
+        <a href="./teams.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <img src="../images/NBA_logoH.png" height="30" /> Loading data...
+                    </h5>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fa fa-spin fa-3x fa-refresh"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Work Area -->
+    <nav class="navbar navbar-light bg-light fixed-bottom">
+        <div class="container small">
+            <div class="navbar-text">&copy;  Introdução as Tecnologias Web - 2023/24</div>
+            <div class="navbar-text">Made with <i class="fa fa-heart-o text-danger"></i> by <a class="text-decoration-none text-muted">Filipe and Guilherme</a>.</div>
+            <div class="navbar-nav">
+                <div class="nav-item text-end"><a href="https://www.ua.pt" class="nav-link">Universidade de Aveiro</a></div>
+            </div>
+        </div>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+    <script src="seasonteamstat.js"></script>
+</body>
+</html>

@@ -53,7 +53,6 @@ var vm = function () {
                 // Assign the default image URL
                 self.Photo("https://upload.wikimedia.org/wikipedia/commons/3/34/PICA.jpg");
             }
-            self.Biography(data.Biography);
             self.Seasons(data.Seasons);
             self.Teams(data.Teams);
         

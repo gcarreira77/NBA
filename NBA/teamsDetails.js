@@ -22,12 +22,14 @@ var vm = function () {
     self.History = ko.observable('');
     self.Players = ko.observableArray([]);
     self.Seasons = ko.observableArray([]);
+    self.selectedSeasonId = ko.observable([]);
 
     //--- Page Events
     self.activate = function (id, acronym) {
         console.log('CALL: getTeam...');
         var composedUri = self.baseUri() + id + '?acronym=' + acronym;
         ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log(composedUri)
             console.log(data);
             self.Id(data.Id);
             self.Acronym(data.Acronym);
@@ -66,6 +68,17 @@ var vm = function () {
         });
     
         return ajaxRequest;
+    }
+
+    self.storeSeasonId = function (data) {
+        // Store the clicked season's ID
+        self.selectedSeasonId(data.Id)
+        var seasonId = self.selectedSeasonId();
+        var teamId = self.Id();
+        var acronym = self.Acronym();
+    
+        // Perform additional actions if needed, e.g., navigate to a new page
+        window.location.href = "seasonteamstat.html?seasonId=" + seasonId + "&teamId=" + teamId + "&Acronym=" + acronym;
     }
 
     function showLoading() {

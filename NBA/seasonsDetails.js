@@ -10,6 +10,8 @@ var vm = function () {
     //--- Data Record
     self.Id = ko.observable('');
     self.Season = ko.observable('');
+    self.Players = ko.observableArray([]);
+    self.Teams = ko.observableArray([]);
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getSeasons...');
@@ -19,6 +21,8 @@ var vm = function () {
             hideLoading();
             self.Id(data.Id);
             self.Season(data.Season);
+            self.Players(data.Players);
+            self.Teams(data.Teams);
 
         });
     };
@@ -39,6 +43,14 @@ var vm = function () {
             }
         });
     }
+    self.searchQuery = ko.observable('');
+
+    self.filteredPlayers = ko.computed(function () {
+        var query = self.searchQuery().toLowerCase();
+        return ko.utils.arrayFilter(self.Players(), function (player) {
+            return player.Name.toLowerCase().indexOf(query) >= 0;
+        });
+    });
 
     function showLoading() {
         $('#myModal').modal('show', {

@@ -41,15 +41,95 @@
     <!-- Work Area-->
     <div class="container">
         <div class="py-2 border-bottom mb-3">
-            <h2 data-bind="text:Season() +' [' + Id() + ']'"></h2>
+            <h2 data-bind="text:Season()"></h2>
         </div>
         <div class="row border-bottom g-2">
-            <div class="col-2">Game Id</div><div class="col-10" data-bind="text: Id"></div>
+            <div class="col-2">Id</div><div class="col-10" data-bind="text: Id"></div>
         </div>
         <div class="row border-bottom g-2">
             <div class="col-2">Season</div><div class="col-10" data-bind="text: Season"></div>
         </div>
-
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                  Players
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <input type="text" data-bind="value: searchQuery, valueUpdate: 'afterkeydown'" placeholder="Search Players" />
+                    <div data-bind="foreach: filteredPlayers">
+                        <span style="border: 1px solid #000000; padding: 2px; margin: 1px;">
+                            <a data-bind="text: Name, attr: { href: 'playersDetails.html?id=' + Id }"></a>
+                        </span>
+                        <span>;</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    Teams
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                  <div class="accordion-body">
+                    <div class="accordion" id="nestedAccordion">
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseOne" aria-expanded="false" aria-controls="nested-collapseOne">
+                                        Western Conference
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseOne" class="accordion-collapse collapse" aria-labelledby="nested-headingOne" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <!-- ko foreach: Teams -->
+                                            <!-- ko if: ConferenceName == 'Western Conference' -->
+                                            <div class="col-md-2 mb-2">
+                                                <a data-bind="attr: { href: 'teamsDetails.html?id=' + Id + '&acronym=' + Acronym }">
+                                                    <img data-bind="attr: { src: Logo }" class="card-img-top" alt="Card image cap" style="width: 100%; height: auto;" />
+                                                </a>
+                                            </div>
+                                            <!-- /ko -->
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseTwo" aria-expanded="false" aria-controls="nested-collapseTwo">
+                                        Eastern Conference
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseTwo" class="accordion-collapse collapse" aria-labelledby="nested-headingTwo" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <!-- ko foreach: Teams -->
+                                            <!-- ko if: ConferenceName == 'Eastern Conference' -->
+                                            <div class="col-md-2 mb-2">
+                                                <a data-bind="attr: { href: 'teamsDetails.html?id=' + Id + '&acronym=' + Acronym }">
+                                                    <img data-bind="attr: { src: Logo }" class="card-img-top" alt="Card image cap" style="width: 100%; height: auto;" />
+                                                </a>
+                                            </div>
+                                            <!-- /ko -->
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                </div>
+          </div>
+            </div>
         <a href="./seasons.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
     <!-- Modal -->

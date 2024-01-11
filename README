@@ -1,0 +1,7 @@
+adicionado:
+-mapa de localizaçao da arena em cada arenasdetails
+-estatisticas de jogador por season e seasontype em playersdetails, no botao "olho"
+-accordions nos teamdetails com temporadas e jogadores, este ultimo com barra de pesquisa pelo nome
+-no accordion com seasons bem como cada season no playerdetails são hiperligaçoes para uma página que mostra jogadores por temporada e tipo de temporada de uma equipa associada
+-nas seasondetails existem dois accordions, um com jogadores na temporada e outro com equipas, divididas por conferencia
+-favoritos a todas as listas com botao de favoritos(arenas, teams, players, states, seasons), ao carregar o botao fica vermelho ate voltar a ser carregado 

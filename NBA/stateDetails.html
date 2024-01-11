@@ -45,7 +45,7 @@
     <!-- Work Area-->
     <div class="container">
         <div class="py-2 border-bottom mb-3">
-            <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
+            <h2 data-bind="text:Name()"></h2>
         </div>
         <div class="row">
             <div class="col-md-3">
@@ -97,33 +97,6 @@
                 </table>
             </div>
         </div>
-        <!-- ko if:Name().length > 0 -->
-        <div class="row border-bottom g-2">
-            <div class="col-2">State Id</div><div class="col-10" data-bind="text: Id"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Name</div><div class="col-10" data-bind="text: Name"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Teams</div>
-            <div class="col-10">
-                <!-- ko foreach: Teams -->
-                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' + Acronym + ']', attr: { href:'./teamDetails.html?id='}" title="Show Team Details"></a>&nbsp;
-                <!-- /ko -->
-            </div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Arenas</div>
-            <div class="col-10">
-                <!-- ko foreach: Arenas -->
-                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' + Name + ']', attr: { href:'./arenaDetails.html?id='}" title="Show Arena Details"></a>,&nbsp;
-                <!-- /ko -->
-                <!-- ko ifnot: Arenas().length -->
-                <p>Não existem arenas(na api)</p>
-                <!-- /ko -->
-            </div>
-        </div>
-        <!-- /ko -->
         <a href="./states.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
     <!-- Modal -->

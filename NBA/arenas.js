@@ -108,7 +108,6 @@ var vm = function () {
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
         console.log(uri);
-
         self.error(''); // Clear error message
         return $.ajax({
             type: method,
@@ -138,7 +137,7 @@ var vm = function () {
     function hideLoading() {
         $('#myModal').on('shown.bs.modal', function (e) {
             $("#myModal").modal('hide');
-        })
+        });
     }
 
     function getUrlParameter(sParam) {
@@ -155,7 +154,6 @@ var vm = function () {
             }
         }
     }; 
-
 
     //--- start ....
     showLoading();

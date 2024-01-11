@@ -59,7 +59,7 @@ var vm = function () {
                 self.pagesize(data.PageSize);
                 self.totalPages(data.TotalPages);
                 self.totalRecords(data.TotalRecords);
-                //self.SetFavourites();
+                setFavs(data.Records);
             });
         } 
         else {
@@ -68,13 +68,46 @@ var vm = function () {
             ajaxHelper(composedUri, 'GET').done(function (data) {
                 console.log(data);
                 self.searchlist(data);
+                setFavs(data);
                 hideLoading();
             });
         }
+        self.favorite = function (item){
+            let localFavs = JSON.parse(localStorage.getItem("favorites_states")) || [];
+            console.log(localFavs)
+            console.log(item)
+            const isFav = localFavs.some((fav) => fav.Id === item.Id)
+            console.log(isFav)
+            if (isFav){
+                localFavs = localFavs.filter((fav) => fav.Id !== item.Id)
+            } else {
+                localFavs.push(item)
+            }
+            localStorage.setItem("favorites_states", JSON.stringify(localFavs));
+            toggleFavClass(item.Id)
+        }
+
+
     };
+    function setFavs(records){
+        let localFavs = JSON.parse(localStorage.getItem("favorites_states")) || [];
+        for (let i = 0; i < records.length; i++){
+            let isFav = localFavs.some((fav) => fav.Id === records[i].Id)
+            if (isFav){
+                toggleFavClass(records[i].Id)
+            }
+        }
+        return records;
+    }
+
+    function toggleFavClass(id){
+        console.log($(`#favouite_${id}`))
+        $(`#favourite_${id}`).toggleClass("fa-heart fa-heart-o text-danger")
+    }
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
+        console.log(uri);
         self.error(''); // Clear error message
         return $.ajax({
             type: method,

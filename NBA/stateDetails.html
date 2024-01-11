@@ -54,7 +54,7 @@
             <div class="col-2">Teams</div>
             <div class="col-10">
                 <!-- ko foreach: Teams -->
-                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' + Acronym + ']', attr: { href:'./teamDetails.html?id='}" title="Show Team Details"></a>,&nbsp;
+                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' + Acronym + ']', attr: { href:'./teamDetails.html?id='}" title="Show Team Details"></a>&nbsp;
                 <!-- /ko -->
             </div>
         </div>
@@ -62,11 +62,12 @@
             <div class="col-2">Arenas</div>
             <div class="col-10">
                 <!-- ko foreach: Arenas -->
-                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' +  + ']', attr: { href:'./arenaDetails.html?id='}" title="Show Arena Details"></a>,&nbsp;
+                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' + Name + ']', attr: { href:'./arenaDetails.html?id='}" title="Show Arena Details"></a>,&nbsp;
+                <!-- /ko -->
+                <!-- ko ifnot: Arenas().length -->
+                <p>Não existem arenas(na api)</p>
                 <!-- /ko -->
             </div>
-            
-
         </div>
         <!-- /ko -->
         <div class="row border-bottom g-2" data-bind="visible: Flag() != '' && Flag() != null">
@@ -76,7 +77,7 @@
                 <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Flag }, text: Flag" target="_blank"></a>]
             </div>
         </div>
-        <!-- /ko -->
+        
         <a href="./states.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
     <!-- Modal -->
@@ -104,8 +105,8 @@
             </div>
         </div>
     </nav>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
 
     

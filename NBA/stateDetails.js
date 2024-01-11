@@ -53,6 +53,7 @@ var vm = function () {
     }
 
     function hideLoading() {
+        console.log("Hiding modal...");
         $("#myModal").modal('hide');
     }
 
@@ -86,8 +87,4 @@ var vm = function () {
 $(document).ready(function () {
     console.log("document.ready!");
     ko.applyBindings(new vm());
-});
-
-$(document).ajaxComplete(function (event, xhr, options) {
-    $("#myModal").modal('hide');
 });

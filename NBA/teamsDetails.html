@@ -11,6 +11,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="myCSS.css" />
+    <style>
+        a.custom-link {
+            text-decoration: none; 
+            display: inline-block; 
+            padding: 5px 10px; 
+            border-radius: 10px; 
+        }
+
+        a.custom-link:hover {
+            background-color: #008CBA; 
+            color: white; 
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -60,99 +73,211 @@
             </div>
         </div>
         <a href="./teams.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
-        <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  Seasons
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Seasons
                 </button>
               </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
                 <div class="accordion-body">
-                    <h4>1950's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('195') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                    <div class="accordion-body">
+                        <!-- Nested Accordion -->
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseOne" aria-expanded="false" aria-controls="nested-collapseOne">
+                                        1950's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseOne" class="accordion-collapse collapse" aria-labelledby="nested-headingOne" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('195') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
-                    </div>
-                    <h4>1960's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('196') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseTwo" aria-expanded="false" aria-controls="nested-collapseTwo">
+                                        1960's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseTwo" class="accordion-collapse collapse" aria-labelledby="nested-headingTwo" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('196') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
-                    </div>
-                    <h4>1970's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('197') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseThree" aria-expanded="false" aria-controls="nested-collapseThree">
+                                        1970's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseThree" class="accordion-collapse collapse" aria-labelledby="nested-headingThree" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('197') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
-                    </div>
-                    <h4>1980's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('198') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseFour" aria-expanded="false" aria-controls="nested-collapseFour">
+                                        1980's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseFour" class="accordion-collapse collapse" aria-labelledby="nested-headingFour" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('198') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
-                    </div>
-                    <h4>1990's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('199') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseFive" aria-expanded="false" aria-controls="nested-collapseFive">
+                                        1990's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseFive" class="accordion-collapse collapse" aria-labelledby="nested-headingFive" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('199') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
-                    </div>
-                    <h4>2000's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('200') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingSix">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseSix" aria-expanded="false" aria-controls="nested-collapseSix">
+                                        2000's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseSix" class="accordion-collapse collapse" aria-labelledby="nested-headingSix" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('200') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
-                    </div>
-                    <h4>2010's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('201') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingSeven">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseSeven" aria-expanded="false" aria-controls="nested-collapseSeven">
+                                        2010's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseSeven" class="accordion-collapse collapse" aria-labelledby="nested-headingTwo" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('201') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
-                    </div>
-                    <h4>2020's</h4>
-                    <div class="table">
-                        <div class="row" data-bind= "foreach: Seasons">
-                            <!--ko if: Season.indexOf('202') !== -1 -->
-                            <div class="col">
-                                <a data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                        <div class="accordion" id="nestedAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="nested-headingEight">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nested-collapseEight" aria-expanded="false" aria-controls="nested-collapseEight">
+                                        2020's
+                                    </button>
+                                </h2>
+                                <div id="nested-collapseEight" class="accordion-collapse collapse" aria-labelledby="nested-headingEight" data-bs-parent="#nestedAccordion">
+                                    <div class="accordion-body">
+                                        <div class="table">
+                                            <div class="row" data-bind= "foreach: Seasons">
+                                                <!--ko if: Season.indexOf('202') !== -1 -->
+                                                <div class="col">
+                                                    <a class="custom-link" data-bind="text: Season, click: $parent.storeSeasonId"></a>
+                                                </div>
+                                                <!--/ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--/ko-->
                         </div>
                     </div>
                 </div>
               </div>
             </div>
-        </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                  Players
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                <div class="accordion-body">
+                    
+                    
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

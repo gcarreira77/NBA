@@ -43,6 +43,22 @@
             background-repeat: no-repeat;
             filter: blur(10px);
         }
+        .rotated-text2 {
+            transform: rotate(-90deg);
+            position: fixed;
+            left: 0%; 
+            top: 120%; 
+            transform-origin: 0 0;
+            white-space: nowrap;
+        }
+        .rotated-text1 {
+            transform: rotate(90deg);
+            position: fixed;
+            left: 100%; 
+            top: 100%; 
+            transform-origin: 0 0;
+            white-space: nowrap;
+        }
         
     </style>
 
@@ -76,45 +92,64 @@
     <!-- Work Area-->
     <div class="container">
         <div class=" border-bottom mb-3">
-            <h2 data-bind="text: Name() + ' ' + Regular().Season + ' Season'"></h2>
+            <h2 data-bind="text: Id()"></h2>
         </div>
-        <div class="py-2 border-bottom mb-3">
-            <h2 data-bind="text: Name() + ' ' + Regular().Season + ' Season'"></h2>
+        <div class="py-2 border-bottom mb-3 rotated-text2" style="top: 70%;"> <!-- Adjust top value as needed -->
+            <h2 data-bind="text: Name() + '    ' + Regular().Season + '    Season'"></h2>
         </div>
-        <div class="row">
-            <div class="col-md-4" style="display: inline-block;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Regular Season</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: Regular().Players">
-                        <tr>
-                            <td data-bind="text: Name"></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="py-2 border-bottom mb-3 rotated-text1" style="top: 30%;"> <!-- Adjust top value as needed -->
+            <h2 data-bind="text: Name() + '    ' + Regular().Season + '    Season'"></h2>
+        </div>
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Regular Season Team
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <div class="col-md-4" style="display: inline-block;">
+                        <table>
+                            <tbody data-bind="foreach: Regular().Players">
+                                <tr>
+                                    <td>
+                                        <a data-bind="attr: { href: 'playersDetails.html?id=' + Id }">
+                                            <i data-bind="text: Name"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+              </div>
             </div>
-        
-            <div class="col-md-4" style="display: inline-block;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Playoffs</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: Playoff().Players">
-                        <tr>
-                            <td data-bind="text: Name"></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                  Playoffs Team
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                <div class="accordion-body">
+                    <div class="col-md-4" style="display: inline-block;">
+                        <table>
+                            <tbody data-bind="foreach: Playoff().Players">
+                                <tr>
+                                    <td>
+                                        <a data-bind="attr: { href: 'playersDetails.html?id=' + Id }">
+                                            <i data-bind="text: Name"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                
+                </div>
+              </div>
             </div>
-        </div>
-        
-        
-    
+          </div>
+
         <a href="./teams.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
 

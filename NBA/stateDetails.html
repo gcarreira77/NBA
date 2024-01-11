@@ -52,10 +52,21 @@
         </div>
         <div class="row border-bottom g-2">
             <div class="col-2">Teams</div>
-            <div class="col-10"><a class="nav-link" data-bind="text:'[]', attr: { href:'./teamDetails.html?id=' }" title="Show Team Details"></a></div>
+            <div class="col-10">
+                <!-- ko foreach: Teams -->
+                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' + Acronym + ']', attr: { href:'./teamDetails.html?id='}" title="Show Team Details"></a>,&nbsp;
+                <!-- /ko -->
+            </div>
         </div>
         <div class="row border-bottom g-2">
-            <div class="col-2">Arenas</div><div class="col-10" data-bind="text: Arenas"></div>
+            <div class="col-2">Arenas</div>
+            <div class="col-10">
+                <!-- ko foreach: Arenas -->
+                <a class="nav-link" style="display: inline-block;" data-bind="text: '[' +  + ']', attr: { href:'./arenaDetails.html?id='}" title="Show Arena Details"></a>,&nbsp;
+                <!-- /ko -->
+            </div>
+            
+
         </div>
         <!-- /ko -->
         <div class="row border-bottom g-2" data-bind="visible: Flag() != '' && Flag() != null">

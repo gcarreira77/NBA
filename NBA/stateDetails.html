@@ -11,6 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="myCSS.css" />
+    <style>
+        .logo-container {
+          width: 15px; 
+          height: 15px; 
+          background-image: url('path/to/your/logo.png'); 
+          background-size: cover; 
+          background-position: center; 
+          background-repeat: no-repeat; 
+      }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -43,6 +53,56 @@
         <div class="py-2 border-bottom mb-3">
             <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
         </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="media-item" data-bind="visible: Flag() != '' && Flag() != null">
+                    <div class="col-2"></div>
+                    <div class="small col-10">
+                        <img style="height:300px; width: 300px; object-fit: cover;" class="img-thumbnail" data-bind="attr:{src: Flag}">
+                        <br />
+                        <i class="fa fa-link"></i>
+                        [<a class="link-dark text-decoration-none" data-bind="attr: { href: Flag }, text:'Flag Link'" target="_blank"></a>]
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-5">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Id</th>
+                    <td data-bind="text: Id"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Name</th>
+                    <td data-bind="text: Name"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Arenas</th>
+                    <td>
+                        <span data-bind="text: Arenas().Name"></span>
+                        <span data-bind="text: Arenas().Location"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-4">
+                <table>
+                  <tbody data-bind="foreach: Teams">
+                    <tr>
+                        <td>
+                          <a data-bind="attr: { href: 'teamsDetails.html?id=' + Id + '&acronym=' + Acronym}">
+                            <img data-bind="attr: { src: Logo }" class="card-img-top" alt="Card image cap" style="width: 10rem; height: 10rem;" />
+                          </a>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
         <!-- ko if:Name().length > 0 -->
         <div class="row border-bottom g-2">
             <div class="col-2">State Id</div><div class="col-10" data-bind="text: Id"></div>
@@ -70,14 +130,6 @@
             </div>
         </div>
         <!-- /ko -->
-        <div class="row border-bottom g-2" data-bind="visible: Flag() != '' && Flag() != null">
-            <div class="col-2">Flag</div>
-            <div class="small col-10">
-                <img class="img-thumbnail" data-bind="attr:{src: Flag}"><br />
-                <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Flag }, text: Flag" target="_blank"></a>]
-            </div>
-        </div>
-        
         <a href="./states.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
     </div>
     <!-- Modal -->

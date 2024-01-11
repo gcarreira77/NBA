@@ -59,7 +59,6 @@ var vm = function () {
                 self.pagesize(data.PageSize)
                 self.totalPages(data.TotalPages);
                 self.totalRecords(data.TotalRecords);
-                //self.SetFavourites();
             });
         }
         else {

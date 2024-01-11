@@ -30,14 +30,14 @@
             z-index: 1;
         }
     
-        /* Center and fit the background image without repeating */
+        
         .blur-background {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: 0; /* Lower z-index to ensure it's behind the content */
+            z-index: 0; 
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -94,10 +94,10 @@
         <div class=" border-bottom mb-3">
             <h2 data-bind="text: Id()"></h2>
         </div>
-        <div class="py-2 border-bottom mb-3 rotated-text2" style="top: 70%;"> <!-- Adjust top value as needed -->
+        <div class="py-2 border-bottom mb-3 rotated-text2" style="top: 70%;"> 
             <h2 data-bind="text: Name() + '    ' + Regular().Season + '    Season'"></h2>
         </div>
-        <div class="py-2 border-bottom mb-3 rotated-text1" style="top: 30%;"> <!-- Adjust top value as needed -->
+        <div class="py-2 border-bottom mb-3 rotated-text1" style="top: 30%;"> 
             <h2 data-bind="text: Name() + '    ' + Regular().Season + '    Season'"></h2>
         </div>
         <div class="accordion" id="accordionPanelsStayOpenExample">

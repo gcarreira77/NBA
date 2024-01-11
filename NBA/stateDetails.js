@@ -3,8 +3,8 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/States/');
-    self.displayName = 'NBA States Details';
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Arenas/');
+    self.displayName = 'NBA Arena Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
@@ -14,9 +14,12 @@ var vm = function () {
     self.Teams = ko.observableArray([]);
     self.Arenas = ko.observableArray([]);
 
+
+
+
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getStates...');
+        console.log('CALL: getArena...');
         var composedUri = self.baseUri() + id;
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
@@ -25,13 +28,10 @@ var vm = function () {
             self.Name(data.Name);
             self.Flag(data.Flag);
             self.Teams(data.Teams);
-            self.Arenas(data.Arenas);
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.log("AJAX Call[" + composedUri + "] Fail...");
-            hideLoading();
-            self.error("Error fetching data: " + errorThrown);
+            self.Arenas(data.Arenas)
         });
     };
+
 
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
@@ -41,7 +41,12 @@ var vm = function () {
             url: uri,
             dataType: 'json',
             contentType: 'application/json',
-            data: data ? JSON.stringify(data) : null
+            data: data ? JSON.stringify(data) : null,
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Call[" + uri + "] Fail...");
+                hideLoading();
+                self.error(errorThrown);
+            }
         });
     }
 
@@ -51,10 +56,10 @@ var vm = function () {
             keyboard: false
         });
     }
-
     function hideLoading() {
-        console.log("Hiding modal...");
-        $("#myModal").modal('hide');
+        $('#myModal').on('shown.bs.modal', function (e) {
+            $("#myModal").modal('hide');
+        })
     }
 
     function getUrlParameter(sParam) {
@@ -70,7 +75,7 @@ var vm = function () {
                 return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
             }
         }
-    }
+    };
 
     //--- start ....
     showLoading();
@@ -88,3 +93,7 @@ $(document).ready(function () {
     console.log("document.ready!");
     ko.applyBindings(new vm());
 });
+
+$(document).ajaxComplete(function (event, xhr, options) {
+    $("#myModal").modal('hide');
+})

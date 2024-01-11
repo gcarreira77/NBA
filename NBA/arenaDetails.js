@@ -44,7 +44,6 @@ var vm = function () {
             self.Lat(data.Lat);
             self.Lon(data.Lon);
             console.log(data.Lat, data.Lon)
-
             self.TeamAcronym(data.TeamAcronym);
             self.Location(data.Location);
             self.Capacity(data.Capacity);

@@ -64,14 +64,13 @@ var vm = function () {
         });
     
         ajaxRequest.always(function () {
-            hideLoading();  // This line is now outside the error callback
+            hideLoading();  
         });
     
         return ajaxRequest;
     }
     self.searchQuery = ko.observable('');
 
-    // Add computed property to filter players based on search query
     self.filteredPlayers = ko.computed(function () {
         var query = self.searchQuery().toLowerCase();
         return ko.utils.arrayFilter(self.Players(), function (player) {
@@ -80,13 +79,11 @@ var vm = function () {
     });
 
     self.storeSeasonId = function (data) {
-        // Store the clicked season's ID
         self.selectedSeasonId(data.Id)
         var seasonId = self.selectedSeasonId();
         var teamId = self.Id();
         var acronym = self.Acronym();
     
-        // Perform additional actions if needed, e.g., navigate to a new page
         window.location.href = "seasonteamstat.html?seasonId=" + seasonId + "&teamId=" + teamId + "&Acronym=" + acronym;
     }
 

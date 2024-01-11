@@ -48,9 +48,7 @@ var vm = function () {
             self.Weight(data.Weight);
             self.School(data.School);
             self.Photo(data.Photo)
-            // Check if self.Photo is falsy or empty
             if (!self.Photo()) {
-                // Assign the default image URL
                 self.Photo("https://upload.wikimedia.org/wikipedia/commons/3/34/PICA.jpg");
             }
             self.Seasons(data.Seasons);
@@ -118,7 +116,6 @@ var vm = function () {
         var seasonId = season.slice(0, -3);
 
     
-        // Perform additional actions if needed, e.g., navigate to a new page
         window.location.href = "seasonteamstat.html?seasonId=" + seasonId + "&teamId=" + teamId + "&Acronym=" + acronym;
     };
 

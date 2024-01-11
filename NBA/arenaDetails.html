@@ -48,34 +48,57 @@
             <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
         </div>
         <!-- ko if:Name().length > 0 -->
-        <div class="row border-bottom g-2">
-            <div class="col-2">Game Id</div><div class="col-10" data-bind="text: Id"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Name</div><div class="col-10" data-bind="text: Name"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">State</div><div class="col-10"><a class="nav-link" data-bind="text:StateName, attr: { href:'./stateDetails.html?id=' + StateId }" title="Show State Details"></a></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Team</div>
-            <div class="col-10"><a class="nav-link" data-bind="text:'[' + TeamAcronym() + '] ' + TeamName(), attr: { href:'./teamDetails.html?id=' + TeamId }" title="Show Team Details"></a></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Location</div><div class="col-10" data-bind="text: Location"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Capacity</div><div class="col-10" data-bind="text: Capacity"></div>
-        </div>
-        <!-- ko if:Opened().length > 0 -->
-        <div class="row border-bottom g-2">
-            <div class="col-2">Opened</div><div class="col-10" data-bind="text: Opened"></div>
-        </div>
-        <!-- /ko -->
-        <div class="row border-bottom g-2" data-bind="visible: Photo() != '' && Photo() != null">
-            <div class="col-2">Photo</div><div class="small col-10">
-                <img class="img-thumbnail" data-bind="attr:{src: Photo}"><br />
-                <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
+        <div class="row">
+            <div class="col-md-3">
+                <div class="media-item" data-bind="visible: Photo() != '' && Photo() != null">
+                    <div class="col-2"></div>
+                    <div class="small col-10">
+                        <img style="height:300px; width: 300px; object-fit: cover;" class="img-thumbnail" data-bind="attr:{src: Photo}">
+                        <br />
+                        <i class="fa fa-link"></i>
+                        [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text:'Foto Link'" target="_blank"></a>]
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-5">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Id</th>
+                    <td data-bind="text: Id"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Name</th>
+                    <td data-bind="text: Name"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">State</th>
+                    <td><a class="nav-link" data-bind="text:StateName"></a></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Location</th>
+                    <td data-bind="text: Location"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Team</th>
+                    <td>
+                        <a>[</a>
+                        <a data-bind="text: TeamAcronym"></a>
+                        <a>]</a>
+                        <a data-bind="text: TeamName"></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Opened</th>
+                    <td data-bind="text: Opened"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Capacity</th>
+                    <td data-bind="text: Capacity"></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
         </div>
 

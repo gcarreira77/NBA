@@ -114,26 +114,19 @@ var vm = function () {
                 return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
             }
         }
-        return null; // return null if parameter not found
+        return null; 
     }
 
-    //--- Page Events
-    
-
-    //--- start ....
     showLoading();
 
-    // Get the values of teamId and seasonId
     var teamId = getUrlParameter('teamId');
     var seasonId = getUrlParameter('seasonId');
     var acronym= getUrlParameter('Acronym');
 
 
-    // Activate ViewModel with parameters from the URL
     if (teamId !== null && seasonId !== null && acronym !== null) {
         self.activate(teamId, seasonId, acronym);
     } else {
-        // Provide default values if parameters are undefined
         self.activate(1610612737, 2020, 'ATL');
     }
 

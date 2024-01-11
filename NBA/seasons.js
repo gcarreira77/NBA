@@ -61,7 +61,6 @@ var vm = function () {
                 self.pagesize(data.PageSize)
                 self.totalPages(data.TotalPages);
                 self.totalRecords(data.TotalRecords);
-                //self.SetFavourites();
             });
         }
         else {
@@ -133,16 +132,13 @@ var vm = function () {
     function handleLinkClick(event) {
         event.preventDefault();
 
-        // Extract the value from the clicked link
         var valueFromLink = $(this).data('value');
 
-        // Update the q parameter and activate the ViewModel
         self.activate(1, valueFromLink);
         
         window.location.href = "C:/Users/Guilherme/Documents/GitHub/NBA/NBA/seasons.html?page=1&q=" + valueFromLink;
     }
 
-    // Attach click event handler to links with a specific class
     $('.search-link').on('click', handleLinkClick);
 
     showLoading();

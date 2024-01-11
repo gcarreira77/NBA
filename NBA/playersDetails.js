@@ -75,7 +75,8 @@ var vm = function () {
                         var regularSeason = {
                             Season:  seasons[i].Season,
                             Regular: data.Regular,
-                            Acronym:  data.Acronym
+                            Acronym:  data.Acronym,
+                            TeamId: data.TeamId
                         }
 
                         self.regular.push(regularSeason);
@@ -84,7 +85,8 @@ var vm = function () {
                             var playoffSeason = {
                                 Season:  seasons[i].Season,
                                 Playoff: data.Playoff,
-                                Acronym:  data.Acronym
+                                Acronym:  data.Acronym,
+                                TeamId: data.TeamId
                             }
                             self.playoff.push(playoffSeason);
                         }
@@ -112,6 +114,15 @@ var vm = function () {
             
         });
     };
+    self.storeSeasonId = function (season, teamId, acronym) {
+        var seasonId = season.slice(0, -3);
+
+    
+        // Perform additional actions if needed, e.g., navigate to a new page
+        window.location.href = "seasonteamstat.html?seasonId=" + seasonId + "&teamId=" + teamId + "&Acronym=" + acronym;
+    };
+
+
     self.selectedRegularSeason = ko.observable();
     self.openModal = function (regularSeason) {
         self.selectedRegularSeason(regularSeason);

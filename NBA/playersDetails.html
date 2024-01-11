@@ -129,8 +129,6 @@
               </div>
               <!--/ko-->
           </div>
-            
-            
         </div>
         <div class="container mt-4">
             <ul class="nav nav-tabs" id="myTabs">
@@ -157,7 +155,9 @@
                     </thead>
                     <tbody data-bind="foreach: regular">
                       <tr>
-                        <td data-bind="text: $data.Season"></td>
+                        <td>
+                          <a class="custom-link" data-bind="text: $data.Season, click: function(data, event) { $parent.storeSeasonId($data.Season, $data.TeamId, $data.Acronym); }"></a>
+                        </td>
                         <td data-bind="text: $data.Acronym"></td>
                         <td data-bind="text: $data.Regular.GamesPlayed"></td>
                         <td data-bind="text: $data.Regular.MinutesPlayed"></td>
@@ -279,7 +279,8 @@
                     </thead>
                     <tbody data-bind="foreach: playoff">
                       <tr>
-                        <td data-bind="text: $data.Season">
+                        <td>
+                          <a class="custom-link" data-bind="text: $data.Season, click: function(data, event) { $parent.storeSeasonId($data.Season, $data.TeamId, $data.Acronym); }"></a>
                         </td>
                         <td data-bind="text: $data.Acronym"></td>
                         <td data-bind="text: $data.Playoff.GamesPlayed"></td>

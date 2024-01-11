@@ -54,22 +54,61 @@
     <!-- Work Area-->
     <div class="container">
         <div class="py-2 border-bottom mb-3">
-            <h2 data-bind="text: Acronym() + ' [' + Id() + ']'"></h2>
+            <h2 data-bind="text: Name() "></h2>
         </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Game Id</div><div class="col-10" data-bind="text: Id"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Name</div><div class="col-10" data-bind="text: Name"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">State</div><div class="col-10"><a class="nav-link" data-bind="text:StateName, attr: { href:'./stateDetails.html?id=' + StateId }" title="Show State Details"></a></div>
-        </div>
-        <div style="max-width: 200px; max-height: 200px; gap: 30px; padding-bottom: 10px; display: flex; flex-direction: column; align-items: center;" class="row border-bottom g-2" data-bind="visible: Logo() != '' && Logo() != null">
-            <div class="col-12 text-center" style="gap: 10px; padding-bottom: 10px;">Logo</div>
-            <div class="small col-12 text-center">
-                <img class="img-thumbnail" data-bind="attr:{src: Logo}"><br />
-                <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Logo }, text: Logo" target="_blank"></a>]
+        <div class="row">
+            <div class="col-md-3">
+                <div class="media-item" data-bind="visible: Logo() != '' && Logo() != null">
+                    <div class="col-2"></div>
+                    <div class="small col-10">
+                        <img style="height:300px; width: 300px; object-fit: cover;" class="img-thumbnail" data-bind="attr:{src: Logo}">
+                        <br />
+                        <i class="fa fa-link"></i>
+                        [<a class="link-dark text-decoration-none" data-bind="attr: { href: Logo }, text: 'Logo Link'" target="_blank"></a>]
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-5">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Id</th>
+                    <td data-bind="text: Id"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">[Acronym]Name</th>
+                    <td>
+                        <span>[</span>
+                        <span data-bind="text:Acronym"></span>
+                        <span>]</span>
+                        <span data-bind="text: Name"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">City</th>
+                    <td data-bind="text: City"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">State</th>
+                    <td>
+                        <a class="nav-link" data-bind="text:StateName, attr: { href:'./stateDetails.html?id=' + StateId }" title="Show State Details"></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Conference</th>
+                    <td data-bind="text: ConferenceName">
+                        <a class="nav-link" data-bind="text:ConferenceName, attr: { href:'./conferenceDetails.html?id=' + ConferenceId }" title="Show Conference Details"></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Division</th>
+                    <td data-bind="text: DivisionName">
+                        <a class="nav-link" data-bind="text:DivisionName, attr: { href:'./divisionDetails.html?id=' + DivisionId }" title="Show Division Details"></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
         </div>
         <a href="./teams.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
@@ -272,8 +311,13 @@
               </h2>
               <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                 <div class="accordion-body">
-                    
-                    
+                    <input type="text" data-bind="value: searchQuery, valueUpdate: 'afterkeydown'" placeholder="Search Players" />
+                    <div data-bind="foreach: filteredPlayers">
+                        <span style="border: 1px solid #000000; padding: 2px; margin: 1px;">
+                            <a data-bind="text: Name, attr: { href: 'playersDetails.html?id=' + Id }"></a>
+                        </span>
+                        <span>;</span>
+                    </div>
                 </div>
               </div>
             </div>

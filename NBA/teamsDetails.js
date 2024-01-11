@@ -69,6 +69,15 @@ var vm = function () {
     
         return ajaxRequest;
     }
+    self.searchQuery = ko.observable('');
+
+    // Add computed property to filter players based on search query
+    self.filteredPlayers = ko.computed(function () {
+        var query = self.searchQuery().toLowerCase();
+        return ko.utils.arrayFilter(self.Players(), function (player) {
+            return player.Name.toLowerCase().indexOf(query) >= 0;
+        });
+    });
 
     self.storeSeasonId = function (data) {
         // Store the clicked season's ID
